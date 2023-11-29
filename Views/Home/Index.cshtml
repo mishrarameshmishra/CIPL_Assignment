@@ -1,8 +1,41 @@
-﻿@{
+﻿@model List<NoticeModel>
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-5">
+    <h2>Notices</h2>
+
+    <table id="noticeTable" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>URL</th>
+                <th>URL Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var notice in Model)
+            {
+                <tr>
+                    <td>@notice.Title</td>
+                    <td><a href="@notice.Url" target="_blank">@notice.Url</a></td>
+                    <td>@notice.UrlType</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
+
+
+@section Script{
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#noticeTable').DataTable({
+            "paging": true,
+            "searching": true
+        });
+    });
+</script>
+
+}
